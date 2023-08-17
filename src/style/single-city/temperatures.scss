@@ -1,0 +1,51 @@
+@import "../../style/_vars.scss";
+
+.temperatures {
+
+  &__container {
+    padding-inline: 0;
+  }
+
+  &__wrapper {
+    overflow: scroll;
+    max-width: 100%;
+    padding-inline: 1rem;
+  }
+
+  &__back-button {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    @include md {
+        font-size: 1.25rem;
+    }
+
+    th {
+      padding-block: 1rem;
+    }
+
+    td {
+      text-align: center;
+      padding-block: 1rem;
+    }
+  }
+
+  &__row-with-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

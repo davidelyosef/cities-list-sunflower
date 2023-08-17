@@ -1,0 +1,136 @@
+@import "../style/_vars.scss";
+
+.header {
+  padding: 2.5rem .5rem 1.5rem;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+
+    @include md {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__search {
+    display: block;
+    margin-bottom: 1rem;
+    position: relative;
+    flex-basis: 100%;
+
+    @include md {
+      flex-basis: unset;
+    }
+
+    @include lg {
+      flex-basis: 30%;
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__reset-text {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 1.125rem;
+    width: 1.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: black;
+    color: white;
+    font-size: 0.75rem;
+  }
+
+  &__continent {
+    display: block;
+    margin-bottom: 1rem;
+    flex-basis: 100%;
+
+    @include md {
+      flex-basis: unset;
+    }
+
+    @include lg {
+      flex-basis: 30%;
+    }
+  }
+
+  input, select {
+    width: 100%;
+    padding-block: .5rem;
+    padding-left: .75rem;
+    padding-right: 1.25rem;
+    border-radius: .25rem;
+    font-size: 1.125rem;
+    border: 1px solid;
+    box-shadow: 1px 0px 6px -1px black inset;
+  }
+
+  select {
+    appearance: none;
+    position: relative;
+  }
+
+  &__continent-dropdown {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+      top: 0;
+      right: 0.75rem;
+      width: 0;
+      height: 0;
+      z-index: 1;
+      bottom: 0;
+      margin-block: auto;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 10px solid #000;
+      pointer-events: none;
+    }
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    font-size: 1.125rem;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      text-decoration: underline;
+    }
+  }
+
+  &__filter-title {
+    margin-bottom: .5rem;
+
+    @include md {
+      margin-bottom: .75rem;
+    }
+  }
+
+  &__subtitle {
+    margin-bottom: .5rem;
+
+    @include md {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__buttons-wrapper {
+    display: flex;
+    column-gap: .5rem;
+  }
+}

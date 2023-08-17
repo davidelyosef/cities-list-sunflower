@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import './App.scss';
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
+import Main from "./pages/Main";
+import SingleCity from "./pages/SingleCity";
+import {TemperatureUnitContext} from "./context";
+import {TemperatureUnit} from "./enums/TemperatureUnit";
+
+const routeDefinitions = createRoutesFromElements(
+  <Route>
+    <Route path="/" element={<Main />} />
+    <Route path="/:city" element={<SingleCity />} />
+  </Route>
+);
+
+const router = createBrowserRouter(routeDefinitions);
 
 function App() {
+
+  const [temperatureUnit, setTemperatureUnit] = useState(TemperatureUnit.Celsius);
+  const value = {temperatureUnit, setTemperatureUnit};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TemperatureUnitContext.Provider value={value} >
+      <RouterProvider router={router} />
+    </TemperatureUnitContext.Provider>
   );
 }
 

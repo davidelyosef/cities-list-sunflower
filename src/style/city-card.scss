@@ -1,0 +1,32 @@
+.city-card {
+  padding: 1.5rem 0.875rem;
+  color: white;
+  background-size: cover;
+  border-radius: 10px;
+  background-position: center;
+  box-shadow: 1px -100px 151px -10px rgba(0,0,0,1) inset;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  border: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__title {
+    font-size: 1.75rem;
+  }
+
+  &__country {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  &__description {
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+}

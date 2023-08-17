@@ -1,0 +1,72 @@
+@import "../../style/_vars.scss";
+
+.masthead {
+  background-color: #000e28;
+  padding-block: 2rem;
+  color: white;
+  margin-bottom: 60px;
+
+  @include md {
+    margin-bottom: 120px;
+  }
+
+  &__flex-wrapper {
+    display: flex;
+    column-gap: 1.25rem;
+
+    @include md {
+      margin-bottom: -140px;
+    }
+
+    @include xl {
+      margin-bottom: -120px;
+    }
+  }
+
+  &__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: .25rem;
+  }
+
+  &__sub-title {
+    margin-block: 0;
+  }
+
+  &__description {
+    margin-bottom: 0;
+    display: none;
+
+    @include md {
+      display: block;
+      margin-top: 0;
+      color: #171717;
+    }
+
+    &.mobile-only {
+      display: block;
+
+      @include md {
+        display: none;
+      }
+    }
+  }
+
+  &__image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    @include md {
+      width: 220px;
+      height: 220px;
+    }
+  }
+}
