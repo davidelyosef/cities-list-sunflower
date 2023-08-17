@@ -1,4 +1,17 @@
-# Getting Started with Create React App
+# Cities list - Sunflower
+Search from a list of cities, and see the weather of the selected cities
+
+## Demo
+https://cities-list-sunflower.web.app/
+
+## Screenshot
+![Screen Shot 2023-08-17 at 19 55 31](https://github.com/davidelyosef/cities-list-sunflower/assets/52068440/950f65b9-0114-4c97-8489-e4d0c0853ad1)
+
+## Features 
+* Search cities by name, country, and continent
+* Sort cities by name and by their distance from the user location (using geolocation API)
+* Choose to display temperature units in Celsius or Fahrenheit across all project
+* See the forecast for the selected city (used AccuWeather API)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
