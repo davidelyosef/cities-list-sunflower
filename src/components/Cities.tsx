@@ -9,6 +9,9 @@ const Cities = ({ filteredCities }: CitiesProps) => {
         {filteredCities && filteredCities.map((city, index) => (
           <CityCard key={index} city={city} />
         ))}
+        {filteredCities.length === 0 && (
+          <div>No results found</div>
+        )}
       </div>
     </div>
   )
