@@ -5,7 +5,7 @@ import {TemperatureUnit} from "../../enums/TemperatureUnit";
 const HeaderTemperatureUnits = () => {
   const {temperatureUnit, setTemperatureUnit} = useContext(TemperatureUnitContext);
 
-  const handleTemperatureUnitChange = (unit: any) => {
+  const handleTemperatureUnitChange = (unit: TemperatureUnit): void => {
     setTemperatureUnit(unit);
   };
 

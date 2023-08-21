@@ -7,7 +7,7 @@ import {WEATHER_LOGO_URL} from "../../config";
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const TemperatureCard = ({ day }: TemperatureCardProps) => {
-  const {temperatureUnit, setTemperatureUnit} = useContext(TemperatureUnitContext);
+  const {temperatureUnit} = useContext(TemperatureUnitContext);
 
   const date = new Date(day.Date);
   const dateString = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
@@ -47,8 +47,8 @@ const TemperatureCard = ({ day }: TemperatureCardProps) => {
 }
 
 const fahrenheitToCelsius = (fahrenheit: number): number => {
-  const celsius = (fahrenheit - 32) * (5 / 9);
-  return celsius;
+  return (fahrenheit - 32) * (5 / 9);
+  // return celsius;
 }
 
 export default TemperatureCard;

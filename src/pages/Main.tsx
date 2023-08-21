@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Header from "../components/Header";
 import Cities from "../components/Cities";
-import {CitiesContext} from "../context";
 import citiesJSON from "../services/cities.json";
 import {City} from "../interfaces/City";
 
@@ -12,10 +11,8 @@ function Main() {
 
   return (
     <>
-      <CitiesContext.Provider value={allCities}>
-        <Header setFilteredCities={setFilteredCities} />
-        <Cities filteredCities={filteredCities} />
-      </CitiesContext.Provider>
+      <Header setFilteredCities={setFilteredCities}/>
+      <Cities filteredCities={filteredCities}/>
     </>
   );
 }

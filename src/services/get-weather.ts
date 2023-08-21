@@ -6,11 +6,11 @@ export const getWeather = (city: City): Weather[] | any => {
 
   const locationKeyUrl = `${ROOT_URL}locations/v1/cities/search${API_KEY}&q=${city.name}`;
 
-  const locationKey = fetchData(locationKeyUrl).then((data: any) => data[0].Key);
+  const locationKey = fetchData(locationKeyUrl).then((data) => data[0].Key);
 
   const weather = locationKey
     .then(key => fetchData(`${ROOT_URL}forecasts/v1/daily/5day/${key}${API_KEY}`))
-    .then((data: any) => data.DailyForecasts ?? data);
+    .then((data) => data.DailyForecasts ?? data);
 
   return weather;
 }

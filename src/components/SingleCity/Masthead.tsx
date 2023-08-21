@@ -8,7 +8,7 @@ const Masthead = ({ city }: MastheadProps) => {
 
         <div>
           <div className="masthead__flex-wrapper">
-            <img src={city.image} alt={city.name} className={"masthead__image"} />
+            {city.image !== undefined && <img src={city.image || ""} alt={city.name} className={"masthead__image"}/>}
 
             <div className="masthead__text-wrapper">
               <div className="masthead__titles">

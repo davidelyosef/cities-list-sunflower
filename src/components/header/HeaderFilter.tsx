@@ -23,14 +23,16 @@ const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
   const filterByNameOrCountry = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    let cities;
-
+    // let cities;
+    //
+    // if (citiesByContinent.length) {
+    //   cities = getCitiesByNameOrCountry(citiesByContinent, value);
+    // } else {
+    //   cities = getCitiesByNameOrCountry(allCities, value);
+    // }
     // if continent is selected, filter by cities with the same continent
-    if (citiesByContinent.length) {
-      cities = getCitiesByNameOrCountry(citiesByContinent, value);
-    } else {
-      cities = getCitiesByNameOrCountry(allCities, value);
-    }
+    const citiesToFilter = citiesByContinent.length ? citiesByContinent : allCities;
+    const cities = getCitiesByNameOrCountry(citiesToFilter, value);
 
     setFilteredCities(cities);
     setCitiesByName(value === "" ? [] : getCitiesByNameOrCountry(allCities, value));
@@ -55,14 +57,17 @@ const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
   const filterByContinent = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
 
-    let cities;
+    // let cities;
+    //
+    // // if name or country is selected, filter by cities with the same name or country
+    // if (citiesByName.length) {
+    //   cities = getCitiesByContinent(citiesByName, value);
+    // } else {
+    //   cities = getCitiesByContinent(allCities, value);
+    // }
 
-    // if name or country is selected, filter by cities with the same name or country
-    if (citiesByName.length) {
-      cities = getCitiesByContinent(citiesByName, value);
-    } else {
-      cities = getCitiesByContinent(allCities, value);
-    }
+    const citiesToFilter = citiesByName.length ? citiesByName : allCities;
+    const cities = getCitiesByContinent(citiesToFilter, value);
 
     setFilteredCities(cities);
     setCitiesByContinent(value === "" ? [] : getCitiesByContinent(allCities, value));
@@ -80,7 +85,7 @@ const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
 
   const resetText = () => {
     setCitiesByName([]);
-    setFilteredCities(allCities);
+    setFilteredCities(citiesByContinent.length ? citiesByContinent : allCities);
     if (searchRef.current) {
       searchRef.current.value = "";
     }
