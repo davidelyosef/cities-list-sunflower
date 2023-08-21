@@ -1,14 +1,15 @@
 import {Continent} from "../../enums/Continent";
 import {ChangeEvent, useContext, useState, useRef} from "react";
 import {City} from "../../interfaces/City";
-import {CitiesContext} from "../../context";
-import {HeaderProps} from "../../interfaces/HeaderProps";
+import {CitiesContext, FilteredCitiesContext} from "../../context";
 
 const continents: Continent[] = [
   Continent.Africa, Continent.Europe, Continent.Asia, Continent.NorthAmerica, Continent.Australia, Continent.SouthAmerica
 ];
 
-const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
+const HeaderFilter = () => {
+  const {setFilteredCities} = useContext(FilteredCitiesContext);
+
   const [citiesByName, setCitiesByName] = useState<City[]>([]);
   const [citiesByContinent, setCitiesByContinent] = useState<City[]>([]);
 
@@ -23,13 +24,6 @@ const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
   const filterByNameOrCountry = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    // let cities;
-    //
-    // if (citiesByContinent.length) {
-    //   cities = getCitiesByNameOrCountry(citiesByContinent, value);
-    // } else {
-    //   cities = getCitiesByNameOrCountry(allCities, value);
-    // }
     // if continent is selected, filter by cities with the same continent
     const citiesToFilter = citiesByContinent.length ? citiesByContinent : allCities;
     const cities = getCitiesByNameOrCountry(citiesToFilter, value);
@@ -57,15 +51,7 @@ const HeaderFilter = ({ setFilteredCities }: HeaderProps) => {
   const filterByContinent = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
 
-    // let cities;
-    //
     // // if name or country is selected, filter by cities with the same name or country
-    // if (citiesByName.length) {
-    //   cities = getCitiesByContinent(citiesByName, value);
-    // } else {
-    //   cities = getCitiesByContinent(allCities, value);
-    // }
-
     const citiesToFilter = citiesByName.length ? citiesByName : allCities;
     const cities = getCitiesByContinent(citiesToFilter, value);
 

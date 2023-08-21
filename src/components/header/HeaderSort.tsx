@@ -1,16 +1,15 @@
-import {useCallback, useContext, useMemo, useState} from "react";
-import {CitiesContext} from "../../context";
-import {HeaderProps} from "../../interfaces/HeaderProps";
+import {useContext, useEffect, useState} from "react";
+import {FilteredCitiesContext} from "../../context";
 import {City, Coords} from "../../interfaces/City";
 
-const HeaderSort = ({setFilteredCities}: HeaderProps) => {
-  const allCities = useContext(CitiesContext);
+const HeaderSort = () => {
+  const {filteredCities, setFilteredCities, setIsLoaderVisible} = useContext(FilteredCitiesContext);
+
   const [userCoords, setUserCoords] = useState<Coords | null>(null);
   const [isSortedByName, setIsSortedByName] = useState<boolean>(false);
   const [isSortedByDistance, setIsSortedByDistance] = useState<boolean>(false);
 
-  const getSortedCitiesByDistance = useCallback((cities: City[], userCoords: Coords | null) => {
-    console.log('useCoords ', userCoords);
+  const getSortedCitiesByDistance = (cities: City[], userCoords: Coords | null) => {
     if (!userCoords) {
       return [];
     }
@@ -19,36 +18,42 @@ const HeaderSort = ({setFilteredCities}: HeaderProps) => {
       const distanceB = calculateDistance(userCoords.lat, userCoords.lng, b.coords.lat, b.coords.lng);
       return distanceA - distanceB;
     });
+  };
+
+  // Update the cities list when the user coordinates change
+  useEffect(() => {
+    if (userCoords) {
+      sortCitiesByDistance();
+    }
   }, [userCoords]);
 
-  const sortCities = () => {
-    const sortedCities = getSortedCitiesByName(allCities);
+  const sortCitiesByName = () => {
+    const sortedCities = getSortedCitiesByName(filteredCities);
     setFilteredCities([...sortedCities]);
 
     setIsSortedByName(true);
     setIsSortedByDistance(false);
   }
 
-  const filterByDistance = () => {
+  const sortCitiesByDistance = () => {
+    setIsLoaderVisible && setIsLoaderVisible(true);
+
     if (!userCoords) {
-      getUserCoords();
+      setUserCoordsByGeolocationAPI();
       return;
     }
 
-    sortCitiesByDistance(allCities, userCoords);
-  }
-
-  const sortCitiesByDistance = (cities: City[], coords: Coords | null) => {
-    console.log('sortCitiesByDistance');
-    const sortedCities = getSortedCitiesByDistance(cities, coords);
+    const sortedCities = getSortedCitiesByDistance(filteredCities, userCoords);
     setFilteredCities([...sortedCities]);
 
     setIsSortedByName(false);
     setIsSortedByDistance(true);
+    console.log('done');
+    setIsLoaderVisible && setIsLoaderVisible(false);
   }
 
-  const getUserCoords = (): void => {
-    console.log('getUserCoords');
+  const setUserCoordsByGeolocationAPI = (): void => {
+    console.log('setUserCoordsByGeolocationAPI');
     if (!("geolocation" in navigator)) {
       return;
     }
@@ -57,10 +62,7 @@ const HeaderSort = ({setFilteredCities}: HeaderProps) => {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
 
-      const userCoords = {lat, lng};
-
-      sortCitiesByDistance(allCities, userCoords);
-      setUserCoords(userCoords);
+      setUserCoords({lat, lng});
     });
   }
 
@@ -68,9 +70,9 @@ const HeaderSort = ({setFilteredCities}: HeaderProps) => {
     <div className={"header__sort"}>
       <div className={"header__subtitle"}>Sort by</div>
       <div className="header__buttons-wrapper">
-        <button onClick={sortCities} className={isSortedByName ? "active" : ""}>Name</button>
+        <button onClick={sortCitiesByName} className={isSortedByName ? "active" : ""}>Name</button>
         |
-        <button onClick={filterByDistance} className={isSortedByDistance ? "active" : ""}>Distance</button>
+        <button onClick={sortCitiesByDistance} className={isSortedByDistance ? "active" : ""}>Distance</button>
       </div>
     </div>
   )

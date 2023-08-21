@@ -1,3 +1,5 @@
+import {Weather} from "./Weather";
+
 export interface WeatherProps {
-  weather: any;
+  weather: Weather[];
 }

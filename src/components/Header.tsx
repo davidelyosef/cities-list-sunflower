@@ -1,24 +1,21 @@
-import {HeaderProps} from "../interfaces/HeaderProps";
 import HeaderFilter from "./header/HeaderFilter";
 import HeaderSort from "./header/HeaderSort";
 import "../style/header.scss";
 import HeaderTemperatureUnits from "./header/HeaderTemperatureUnits";
 
-const Header = ({setFilteredCities}: HeaderProps) => {
+const Header = () => {
 
   return (
     <header className={"header"}>
-
       <div className="header__container container">
 
-        <HeaderFilter setFilteredCities={setFilteredCities}/>
-        <HeaderSort setFilteredCities={setFilteredCities}/>
-        <HeaderTemperatureUnits/>
+        <HeaderFilter />
+        <HeaderSort />
+        <HeaderTemperatureUnits />
 
       </div>
     </header>
   )
 }
-
 
 export default Header;

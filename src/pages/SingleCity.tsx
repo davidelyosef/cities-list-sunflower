@@ -12,21 +12,21 @@ function SingleCity() {
   const allCities = useContext(CitiesContext);
   const location = useLocation();
   const city: City = location.state ? location.state.city : findCityByName(allCities, location.pathname.replace('/', '').replace('-', ' '));
-  const jerusalem: any = WeatherJSON.DailyForecasts;
+  // const jerusalem: any = WeatherJSON.DailyForecasts;
 
   const [weather, setWeather] = useState<Weather[]>([]);
 
   useEffect(() => {
-    // const weatherPromise = getWeather(jerusalem);
-    // weatherPromise.then((weather: Weather[]) => {
-    //   setWeather(weather);
-    // })
-    //   .catch((error: unknown) => {
-    //     console.log('The allowed number of requests has been exceeded: ' + error);
-    //     // Setting the weather to the JSON file in case the API call fails
-    //     setWeather(WeatherJSON.DailyForecasts);
-    //   });
-    setWeather(jerusalem);
+    const weatherPromise = getWeather(city);
+    weatherPromise.then((weather: Weather[]) => {
+      setWeather(weather);
+    })
+      .catch((error: unknown) => {
+        console.log('The allowed number of requests has been exceeded: ' + error);
+        // Setting the weather to the JSON file in case the API call fails
+        setWeather(WeatherJSON.DailyForecasts);
+      });
+    // setWeather(jerusalem);
   }, []);
 
   return (
@@ -35,10 +35,10 @@ function SingleCity() {
       {weather && <Temperatures weather={weather}/>}
     </>
   )
-}
 
-function findCityByName(cities: City[], name: string): City | undefined {
-  return cities.find((city: City) => city.name.toLowerCase() === name);
+  function findCityByName(cities: City[], name: string): City | undefined {
+    return cities.find((city: City) => city.name.toLowerCase() === name);
+  }
 }
 
 export default SingleCity;
