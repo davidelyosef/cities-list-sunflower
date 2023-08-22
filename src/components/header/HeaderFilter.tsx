@@ -1,17 +1,26 @@
 import {Continent} from "../../enums/Continent";
-import {ChangeEvent, useContext, useState, useRef} from "react";
+import {ChangeEvent, useContext, useRef, useState} from "react";
 import {City} from "../../interfaces/City";
 import {CitiesContext, FilteredCitiesContext} from "../../context";
+import Select, {SingleValue} from "react-select";
+import {ContinentOption} from "../../interfaces/ContinentOption";
 
-const continents: Continent[] = [
-  Continent.Africa, Continent.Europe, Continent.Asia, Continent.NorthAmerica, Continent.Australia, Continent.SouthAmerica
-];
+const continentOptions: ContinentOption[] = [
+  { value: "", label: "All continents" },
+  { value: Continent.Africa, label: Continent.Africa },
+  { value: Continent.Europe, label: Continent.Europe },
+  { value: Continent.Asia, label: Continent.Asia },
+  { value: Continent.NorthAmerica, label: Continent.NorthAmerica },
+  { value: Continent.Australia, label: Continent.Australia },
+  { value: Continent.SouthAmerica, label: Continent.SouthAmerica },
+]
 
 const HeaderFilter = () => {
   const {setFilteredCities} = useContext(FilteredCitiesContext);
 
   const [citiesByName, setCitiesByName] = useState<City[]>([]);
   const [citiesByContinent, setCitiesByContinent] = useState<City[]>([]);
+  const [continent, setContinent] = useState<ContinentOption>(continentOptions[0]);
 
   const allCities = useContext(CitiesContext);
 
@@ -46,15 +55,20 @@ const HeaderFilter = () => {
 
   /**
    * Filter cities by continent
-   * @param event
+   * @param option
    */
-  const filterByContinent = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  const filterByContinent = (newValue: SingleValue<ContinentOption>): void => {
+    if (!newValue) {
+      return;
+    }
+
+    const {value} = newValue;
 
     // // if name or country is selected, filter by cities with the same name or country
     const citiesToFilter = citiesByName.length ? citiesByName : allCities;
     const cities = getCitiesByContinent(citiesToFilter, value);
 
+    setContinent(newValue);
     setFilteredCities(cities);
     setCitiesByContinent(value === "" ? [] : getCitiesByContinent(allCities, value));
   }
@@ -90,12 +104,7 @@ const HeaderFilter = () => {
       <div className={"header__continent"}>
         <div className={"header__filter-title"}>Continent</div>
         <div className="header__continent-dropdown">
-          <select onChange={filterByContinent}>
-            <option value={""}>All continents</option>
-            {continents.map((continent: Continent, index: number) => (
-              <option key={index} value={continent}>{continent}</option>
-            ))}
-          </select>
+          <Select options={continentOptions} onChange={filterByContinent} value={continent} />
         </div>
       </div>
     </>
