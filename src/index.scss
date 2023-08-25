@@ -2,31 +2,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
 
-  * {
+* {
     box-sizing: border-box;
-  }
+}
 }
 
 .container {
-  padding-inline: 1rem;
+    padding-inline: 1rem;
 
-  @include md() {
+@include md() {
     max-width: 767px;
     margin-inline: auto;
-  }
+}
 
-  @include lg() {
+@include lg() {
     max-width: 1023px;
-  }
+}
 
-  @include xl() {
+@include xl() {
     max-width: 1200px;
-  }
+}
 
-  @include xl2() {
+@include xl2() {
     max-width: 1400px;
-  }
+}
 }

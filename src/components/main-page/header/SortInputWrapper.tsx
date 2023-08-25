@@ -1,8 +1,8 @@
+import {City, Coords} from "../../../interfaces/City";
 import {useContext, useEffect, useState} from "react";
-import {FilteredCitiesContext} from "../../context";
-import {City, Coords} from "../../interfaces/City";
+import {FilteredCitiesContext} from "../../../context";
 
-const HeaderSort = () => {
+const SortInputWrapper = () => {
   const {filteredCities, setFilteredCities, setIsLoaderVisible} = useContext(FilteredCitiesContext);
 
   const [userCoords, setUserCoords] = useState<Coords | null>(null);
@@ -48,12 +48,10 @@ const HeaderSort = () => {
 
     setIsSortedByName(false);
     setIsSortedByDistance(true);
-    console.log('done');
     setIsLoaderVisible && setIsLoaderVisible(false);
   }
 
   const setUserCoordsByGeolocationAPI = (): void => {
-    console.log('setUserCoordsByGeolocationAPI');
     if (!("geolocation" in navigator)) {
       return;
     }
@@ -70,9 +68,13 @@ const HeaderSort = () => {
     <div className={"header__sort"}>
       <div className={"header__subtitle"}>Sort by</div>
       <div className="header__buttons-wrapper">
-        <button onClick={sortCitiesByName} className={isSortedByName ? "active" : ""}>Name</button>
+        <button onClick={sortCitiesByName} className={`${isSortedByName ? "active" : ""} header__sort-button`}>
+          Name
+        </button>
         |
-        <button onClick={sortCitiesByDistance} className={isSortedByDistance ? "active" : ""}>Distance</button>
+        <button onClick={sortCitiesByDistance} className={`${isSortedByDistance ? "active" : ""} header__sort-button`}>
+          Distance
+        </button>
       </div>
     </div>
   )
@@ -93,10 +95,9 @@ const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 const getSortedCitiesByName = (cities: City[]): City[] => {
-  console.log('getSortedCitiesByName');
   return cities.sort((a: City, b: City) => {
     return a.name.localeCompare(b.name);
   });
 }
 
-export default HeaderSort;
+export default SortInputWrapper;

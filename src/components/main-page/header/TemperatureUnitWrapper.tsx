@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import {TemperatureUnitContext} from "../../context";
-import {TemperatureUnit} from "../../enums/TemperatureUnit";
+import {TemperatureUnitContext} from "../../../context";
+import {TemperatureUnit} from "../../../enums/TemperatureUnit";
 
-const HeaderTemperatureUnits = () => {
+const TemperatureUnitWrapper = () => {
   const {temperatureUnit, setTemperatureUnit} = useContext(TemperatureUnitContext);
 
   const handleTemperatureUnitChange = (unit: TemperatureUnit): void => {
@@ -14,12 +14,12 @@ const HeaderTemperatureUnits = () => {
       <div className={"header__subtitle"}>Units</div>
       <div className="header__buttons-wrapper">
         <button
-          className={temperatureUnit === TemperatureUnit.Celsius ? "active" : ""}
+          className={`${temperatureUnit === TemperatureUnit.Celsius ? "active" : ""} header__sort-button`}
           onClick={() => handleTemperatureUnitChange(TemperatureUnit.Celsius)}>
           °C
         </button>|
         <button
-          className={temperatureUnit === TemperatureUnit.Fahrenheit ? "active" : ""}
+          className={`${temperatureUnit === TemperatureUnit.Fahrenheit ? "active" : ""} header__sort-button`}
           onClick={() => handleTemperatureUnitChange(TemperatureUnit.Fahrenheit)}>
           °F
         </button>
@@ -28,4 +28,4 @@ const HeaderTemperatureUnits = () => {
   )
 }
 
-export default HeaderTemperatureUnits;
+export default TemperatureUnitWrapper;

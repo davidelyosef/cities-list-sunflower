@@ -1,11 +1,10 @@
+import {Link} from "react-router-dom";
 import {WeatherProps} from "../../interfaces/WeatherProps";
+import "../../style/single-city/temperatures.scss";
 import {Weather} from "../../interfaces/Weather";
 import TemperatureCard from "./TemperatureCard";
-import "../../style/single-city/temperatures.scss";
-import {Link} from "react-router-dom";
 
-const Temperatures = ({weather}: WeatherProps) => {
-
+const TemperatureTable = ({weather}: WeatherProps) => {
   return (
     <div className={"temperatures"}>
       <div className="temperatures__container container">
@@ -34,4 +33,4 @@ const Temperatures = ({weather}: WeatherProps) => {
   )
 }
 
-export default Temperatures;
+export default TemperatureTable;

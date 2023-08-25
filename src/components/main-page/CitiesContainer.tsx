@@ -1,11 +1,11 @@
+import React, {useContext} from "react";
+import {FilteredCitiesContext} from "../../context";
+import Loader from "../Loader";
 import CityCard from "./CityCard";
-import "../style/cities.scss";
-import {useContext} from "react";
-import {FilteredCitiesContext} from "../context";
-import Loader from "./Loader";
+import "../../style/cities.scss";
 
-const Cities = () => {
-  const {filteredCities} = useContext(FilteredCitiesContext);
+const CitiesContainer = () => {
+  const filteredCities = useContext(FilteredCitiesContext).filteredCities;
 
   return (
     <div className={"cities"}>
@@ -22,4 +22,4 @@ const Cities = () => {
   )
 }
 
-export default Cities;
+export default React.memo(CitiesContainer);

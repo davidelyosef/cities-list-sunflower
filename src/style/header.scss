@@ -80,8 +80,11 @@
   }
 
   button {
-    background: transparent;
     border: none;
+  }
+
+  &__sort-button {
+    background: transparent;
     font-size: 1.125rem;
     padding: 0;
     cursor: pointer;

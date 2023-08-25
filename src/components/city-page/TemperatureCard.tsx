@@ -48,7 +48,6 @@ const TemperatureCard = ({ day }: TemperatureCardProps) => {
 
 const fahrenheitToCelsius = (fahrenheit: number): number => {
   return (fahrenheit - 32) * (5 / 9);
-  // return celsius;
 }
 
 export default TemperatureCard;
