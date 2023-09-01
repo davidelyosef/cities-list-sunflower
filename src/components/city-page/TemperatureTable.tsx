@@ -4,7 +4,7 @@ import "../../style/single-city/temperatures.scss";
 import {Weather} from "../../interfaces/Weather";
 import TemperatureCard from "./TemperatureCard";
 
-const TemperatureTable = ({weather}: WeatherProps) => {
+const TemperatureTable = ({weather}: WeatherProps | any) => {
   return (
     <div className={"temperatures"}>
       <div className="temperatures__container container">
