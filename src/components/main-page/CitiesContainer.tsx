@@ -5,12 +5,12 @@ import CityCard from "./CityCard";
 import "../../style/cities.scss";
 
 const CitiesContainer = () => {
-  const filteredCities = useContext(FilteredCitiesContext).filteredCities;
+  const {filteredCities, isLoaderVisible} = useContext(FilteredCitiesContext);
 
   return (
     <div className={"cities"}>
       <div className="cities__container container">
-        <Loader />
+        {isLoaderVisible && <Loader />}
         {filteredCities && filteredCities.map((city, index) => (
           <CityCard key={index} city={city}/>
         ))}
